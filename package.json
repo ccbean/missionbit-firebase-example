@@ -31,11 +31,15 @@
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26",
     "angularfire2": "5.0.0-rc.4",
-    "firebase": "4.6.2"
+    "firebase": "4.6.2",
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=4.2.1"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.0",
-    "typescript": "~2.6.2"
+    "typescript": "~2.6.2",
+    "cryptiles": ">=4.1.2",
+    "hoek": ">=4.2.1"
   },
   "description": "An Ionic project"
 }
