@@ -1,4 +1,4 @@
-##This is a demo project for Firebase features.  
+## This is a demo project for Firebase features.  
 It includes:
  - Firebase Auth demo including email and password login / signup and Google authentication.
  
