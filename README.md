@@ -1,4 +1,5 @@
-This is a demo project for Firebase features.  It includes:
+##This is a demo project for Firebase features.  
+It includes:
  - Firebase Auth demo including email and password login / signup and Google authentication.
  
  To use this project, clone it, run **npm install** in the project directory, and copy the example environment config 
