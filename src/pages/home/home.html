@@ -1,14 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Firebase Example
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+  <div *ngIf="auth.authenticated == true">
+    <p>
+      Welcome, <b>{{auth.getEmail()}}</b> 
+    </p>
+    <button ion-button (click)="logout()">Log Out</button>
+  </div>
+  <div *ngElse>
+    <button ion-button (click)="login()">Log In</button>
+  </div>
 </ion-content>
