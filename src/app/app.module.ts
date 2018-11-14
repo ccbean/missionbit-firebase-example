@@ -14,6 +14,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environment/environment';
 import { LoginPage } from '../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
+import { FirebaseDataProvider } from '../providers/firebase-data/firebase-data';
+import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { LoginPageModule } from '../pages/login/login.module';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     NgxErrorsModule,
     AngularFireAuthModule,
     LoginPageModule
@@ -38,7 +41,8 @@ import { LoginPageModule } from '../pages/login/login.module';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirebaseAuthProvider
+    FirebaseAuthProvider,
+    FirebaseDataProvider
   ]
 })
 export class AppModule {}

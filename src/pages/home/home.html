@@ -12,6 +12,13 @@
     <p>
       Welcome, <b>{{auth.getEmail()}}</b> 
     </p>
+    <ion-list>
+      <ion-item *ngFor="let note of notes | async">
+        <b>{{note.title}}</b>
+        <p>{{note.body}}</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button (click)="this.navCtrl.push('AddNotePage')">Add Note</button>
     <button ion-button (click)="logout()">Log Out</button>
   </div>
   <div *ngElse>
