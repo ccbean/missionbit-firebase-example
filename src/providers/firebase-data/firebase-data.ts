@@ -29,8 +29,6 @@ export class FirebaseDataProvider {
           const id = item.payload.id;
           const data = item.payload.data();
           data['id'] = id;
-          console.log("Test")
-          console.log(data);
           return data;
         }
       }
@@ -41,10 +39,10 @@ export class FirebaseDataProvider {
     var profile = this.afs.firestore.doc('/userProfiles/' + userId).get().then(
       doc => {
         if(doc.exists){
-          console.log("exists");
+          console.log("profile exists");
         }
         else{
-          console.log("does not exist, creating");
+          console.log("profile does not exist, creating");
           this.afs.collection('/userProfiles/').doc(userId).set({
             userName: "New User",  
             createdAt: firebase.firestore.FieldValue.serverTimestamp()

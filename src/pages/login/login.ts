@@ -22,8 +22,6 @@ export class LoginPage {
   loginError: string;
 
   constructor(public navCtrl: NavController, public fb: FormBuilder, public auth: FirebaseAuthProvider){
-    console.log(auth);
-    console.log(auth.user);
     this.loginForm = fb.group({
             email: ['', Validators.compose([Validators.required, Validators.email])],
             password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]

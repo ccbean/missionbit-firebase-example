@@ -32,14 +32,10 @@ export class HomePage {
           this.favorites = fbData.listFavorites(user);
           this.favorites.subscribe(item => 
             {
-              console.log("fav");
-              console.log(item);
               this.favoriteList = [];
               item.map( fav => {
                 this.favoriteList.push(fav.id);
               })
-              console.log('fav2');
-              console.log(this.favoriteList);
             })
             
         }
@@ -49,11 +45,9 @@ export class HomePage {
 
   hasFav(noteId){
     return this.favoriteList.indexOf(noteId) >= 0;
-   
   }
 
   toggleFav(noteId){
-    console.log(noteId);
     this.fbData.toggleNoteFavorite(this.user, noteId);
   }
 
