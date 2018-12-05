@@ -17,15 +17,34 @@ export class FirebaseDataProvider {
     console.log('Hello FirebaseDataProvider Provider');
   }
 
-  getOrCreateUserProfile(userId) : Promise<firebase.firestore.DocumentSnapshot>{
-   // console.log(this.afs.firestore.doc('/userProfiles/' + userId + "/profile").get());
+  getOrCreateUserProfile(userId): Observable<any>{
+    this.checkCreateUserProfile(userId);
+    return this.getUserProfile(userId);    
+  }
+
+  getUserProfile(userId): Observable<any>{
+    return this.afs.doc('/userProfiles/' + userId).snapshotChanges().map(
+      item => {
+        if(item.payload.exists){
+          const id = item.payload.id;
+          const data = item.payload.data();
+          data['id'] = id;
+          console.log("Test")
+          console.log(data);
+          return data;
+        }
+      }
+    );
+  }
+
+  checkCreateUserProfile(userId){
     var profile = this.afs.firestore.doc('/userProfiles/' + userId).get().then(
       doc => {
         if(doc.exists){
           console.log("exists");
         }
         else{
-          console.log("no doc");
+          console.log("does not exist, creating");
           this.afs.collection('/userProfiles/').doc(userId).set({
             userName: "New User",  
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -37,17 +56,18 @@ export class FirebaseDataProvider {
     return profile;
   }
 
+
   listFavorites(user){
     if(user == null){
       return;
     }
     return this.afs.collection('/userProfiles/' + user.uid + '/favorites/').snapshotChanges().map(actions => {
       return actions.map( item=> {
-        const id = item.payload.doc.id;          
+        const id = item.payload.doc.id;
         const data = item.payload.doc.data();
         data['id'] = id;
         return data;
-      });
+      })
     });
   }
 
@@ -66,22 +86,9 @@ export class FirebaseDataProvider {
     });
   }
 
-  getNoteFavorite(user, noteId){
-//    this.afs.firestore.doc('/userProfiles/' + user.uid + '/favorites/' + noteId).get();
-    return "sdfds";
-    // var retval = false;
-    // return this.afs.firestore.doc('/userProfiles/' + user.uid + '/favorites/' + noteId).get()
-    
-    // .then(
-    //   doc => {
-    //     retval = doc.exists;
-    //   }
-    // )
-  }
-
   toggleNoteFavorite(user, noteId){
     this.afs.firestore.doc('/userProfiles/' + user.uid + '/favorites/' + noteId).get().then(
-      doc => {
+      doc => {        
         if(doc.exists){
           doc.ref.delete();
         }

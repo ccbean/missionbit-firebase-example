@@ -11,13 +11,26 @@
   <div *ngIf="auth.authenticated == true">
     <p>
       Welcome, <b>{{auth.getEmail()}}</b> 
+      a {{(userProfile|async)?.userName}} a
     </p>
-    <ion-list>
-      <ion-item *ngFor="let note of notes | async">
-        <b>{{note.title}}</b>
-        <p>{{note.body}}</p>
-      </ion-item>
-    </ion-list>
+    <!-- <ion-list> -->
+      <!-- <ion-item *ngFor="let note of notes | async"> -->
+        <ion-card *ngFor="let note of notes | async">
+          <ion-card-header color="secondary">
+            {{note.createdAt}}
+          </ion-card-header>
+          <ion-card-content>
+            <ion-card-title>
+              <b>{{note.title}}</b>              
+              <ion-checkbox (click)="toggleFav(note.id);" checked="{{hasFav(note.id)}}" style="float:right;"></ion-checkbox>
+            </ion-card-title>            
+            a {{hasFav(note.id)}} {{note.id}}
+             <p>{{note.body}}</p>
+          
+          </ion-card-content>
+        </ion-card>
+      <!-- </ion-item> -->
+    <!-- </ion-list> -->
     <button ion-button (click)="this.navCtrl.push('AddNotePage')">Add Note</button>
     <button ion-button (click)="logout()">Log Out</button>
   </div>
